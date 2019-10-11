@@ -1,10 +1,45 @@
-WikiXMLJ provides easy access to Wikipedia XML dumps.
+# mediawikixml
 
-Features
---------
+mediawikixml is a Java library which provides easy access to MediaWiki dump xml files. 
 
-* Easy access to important elements of a Wikipedia page
-* Also provides interfaces for Wiki text parsing.
+Its based on [WikiXMLJ](https://github.com/delip/wikixmlj). In difference to WikiXMLJ the project has been updated and
+refactored and is actively maintained.
+
+## Usage
+
+The library can used via Maven. Add a external repository to the pom.xml:
+
+<repositories>
+	<repository>
+		<id>github</id>
+		<url>https://maven.pkg.github.com/seeseekey/mediawikixml</url>
+	</repository>
+</repositories>
+
+After this you can add the depend
+
+
+
+> WikiXMLParser wikiXMLParser = WikiXMLParserFactory.getParser("dump-current.xml");
+> 
+> try {
+> 
+> 	wikiXMLParser.setPageCallback(new PageCallbackHandler() {
+> 		public void process(WikiPage page) {
+> 			System.out.println(page.getTitle());
+> 			System.out.println(page.getWikiText());
+> 		}
+> 	});
+> 
+> 	wikiXMLParser.parse();
+> } catch (Exception e) {
+> 	e.printStackTrace();
+> }
+
+## Features
+
+* Easy access to important elements of a MediaWiki page
+* Also provides interfaces for Wiki text parsing
 * Memory efficient
 * SAX interface for parsing
 * Lazy loading of files for DOM
@@ -13,64 +48,49 @@ Features
 
 Note: gzip streams are way faster than bzip2 for a slight trade off in space.
 
-DOMParser Example
------------------
+## Dependencies
 
-       import edu.jhu.nlp.wikipedia.*;
+The project uses some basic dependencies:
 
+* Guava
+* GSON
+* ant-compress
+* SLF4J
+* JUnit (Version 5)
 
-        WikiXMLParser wxp = WikiXMLParserFactory.getDOMParser(args[0]);
-        try {
-                wxp.parse();
-                WikiPageIterator it = wxp.getIterator();
-                while(it.hasMorePages()) {
-                        WikiPage page = it.nextPage();
-                        System.out.println(page.getTitle());
-                }
+Guava is a java helper library which deliver some interesting functions like LoadingCaches and helper methods. GSON 
+helps to serialise JSON into classes and vice verse. SLF4J is a facade for logging.
 
-        }catch(Exception e) {
-                e.printStackTrace();
-        }
+JUnit is used for unit testing.
 
+# Plugins
 
-SAXParser Example
------------------
+Define Java 8 as project version. Surfire-Plugin for executing tests.
 
-        import edu.jhu.nlp.wikipedia.*;
+## Developing
 
-        WikiXMLParser wxsp = WikiXMLParserFactory.getSAXParser(args[0]);
-                
-        try {
-                  
-            wxsp.setPageCallback(new PageCallbackHandler() { 
-                           public void process(WikiPage page) {
-                                  System.out.println(page.getTitle());
-                           }
-            });
-                
-           wxsp.parse();
-        }catch(Exception e) {
-                e.printStackTrace();
-        }
+Project can be compiled with:
 
-Notes
------
+> mvn clean compile
 
-1. The DOM parser is known to run out of memory despite of lazy loading the DOM tree for very large Wikipedia dumps (like English). This issue will be fixed eventually until then using the SAX parser interface is highly recommended. If you really want to use the DOM parser, try it with the callback interface.
+Package can be created with:
 
-2.This should not be confused with the Java Wikipedia Parser that converts wiki-text to HTML.
+> mvn clean package
 
-Dependencies
-------------
+## Authors
 
-All dependencies are packaged into this source. The dependencies might have different licensing terms.
+* seeseekey - [seeseekey.net](https://seeseekey.net)
 
-Apache Xerces DOM parser for lazy loading.
-Optionally uses bzip2 code refactored by Kohsuke Kawaguchi from Apache's Ant project.
+### Original contributors from WikiXMLJ
 
-Contributors
-------------
-Jason Smith<br>
-Itamar Syn-Hershko (@synhershko)<br>
-[Alan Said](http://github.com/alansaid) ([@alansaid](http://twitter.com/alansaid))  
-[Victor Olivares](http://github.com/treedust)  
+* Jason Smith 
+ Victor Olivares
+* Itamar Syn-Hershko (@synhershko)
+* [Alan Said](http://github.com/alansaid) ([@alansaid](http://twitter.com/alansaid))  
+* [Victor Olivares](http://github.com/treedust)  
+* Delip Rao
+* andyhedges
+
+## License
+
+mediawikixml is licensed under Apache license in version 2.
