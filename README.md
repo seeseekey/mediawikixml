@@ -85,13 +85,12 @@ Package can be created with:
 
 ### Original contributors from WikiXMLJ
 
-* Jason Smith 
- Victor Olivares
+* [Alan Said](http://github.com/alansaid)
+* Andy Hedges
+* [Delip Rao](https://github.com/delip)
 * Itamar Syn-Hershko (@synhershko)
-* [Alan Said](http://github.com/alansaid) ([@alansaid](http://twitter.com/alansaid))  
+* Jason Smith 
 * [Victor Olivares](http://github.com/treedust)  
-* Delip Rao
-* andyhedges
 
 ## License
 
