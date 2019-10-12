@@ -21,20 +21,33 @@ The library can used via Maven. Add a external repository to the pom.xml:
 After this you can add the dependency:
 
 ```
+<dependency>
+    <groupId>net.seeseekey</groupId>
+    <artifactId>mediawikixml</artifactId>
+    <version>1.0.1</version>
+</dependency>
+```
+
+Now you can parse your first dump file:
+
+```
 WikiXMLParser wikiXMLParser = WikiXMLParserFactory.getParser("dump-current.xml");
 
 try {
 
- wikiXMLParser.setPageCallback(new PageCallbackHandler() {
-		public void process(WikiPage page) {
-			System.out.println(page.getTitle());
-			System.out.println(page.getWikiText());
-		}
-	});
+    wikiXMLParser.setPageCallback(new PageCallbackHandler() {
+        public void process(WikiPage page) {
+            System.out.println(page.getId());
+            System.out.println(page.getRevisionId());
+            System.out.println(page.getTimestamp());
+            System.out.println(page.getTitle());
+            System.out.println(page.getWikiText());
+        }
+    });
 
-	wikiXMLParser.parse();
+    wikiXMLParser.parse();
 } catch (Exception e) {
-	e.printStackTrace();
+    e.printStackTrace();
 }
 ```
 
