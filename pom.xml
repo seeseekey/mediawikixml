@@ -7,7 +7,7 @@
     <!-- Artifact / group id and version -->
     <groupId>net.seeseekey</groupId>
     <artifactId>mediawikixml</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
 
     <!-- Metadata -->
     <name>mediawikixml</name>

@@ -9,16 +9,14 @@ refactored and is actively maintained.
 
 The library can used via Maven. Add a external repository to the pom.xml:
 
-<repositories>
-	<repository>
-		<id>github</id>
-		<url>https://maven.pkg.github.com/seeseekey/mediawikixml</url>
-	</repository>
-</repositories>
+> <repositories>
+> 	<repository>
+> 		<id>github</id>
+> 		<url>https://maven.pkg.github.com/seeseekey/mediawikixml</url>
+> 	</repository>
+> </repositories>
 
-After this you can add the depend
-
-
+After this you can add the dependency:
 
 > WikiXMLParser wikiXMLParser = WikiXMLParserFactory.getParser("dump-current.xml");
 > 
