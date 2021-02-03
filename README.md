@@ -7,24 +7,13 @@ refactored and is actively maintained.
 
 ## Usage
 
-The library can used via Maven. Add a external repository to the pom.xml:
-
-```
-<repositories>
- <repository>
- 	<id>github</id>
- 	<url>https://maven.pkg.github.com/seeseekey/mediawikixml</url>
- </repository>
-</repositories>
-```
-
-After this you can add the dependency:
+The library can used via Maven. Add the dependency:
 
 ```
 <dependency>
     <groupId>net.seeseekey</groupId>
     <artifactId>mediawikixml</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
