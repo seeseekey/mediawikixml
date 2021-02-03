@@ -7,7 +7,7 @@
     <!-- Artifact / group id and version -->
     <groupId>net.seeseekey</groupId>
     <artifactId>mediawikixml</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
 
     <!-- Metadata -->
     <name>mediawikixml</name>
@@ -32,19 +32,24 @@
         </developer>
     </developers>
 
+    <scm>
+        <connection>scm:git:git://github.com/seeseekey/mediawikixml.git</connection>
+        <developerConnection>scm:git:ssh://github.com:seeseekey/mediawikixml.git</developerConnection>
+        <url>https://github.com/seeseekey/mediawikixml/tree/master</url>
+    </scm>
+
     <!-- Encoding settings -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <!-- Definition for uploading artifact to custom repository -->
+    <!-- Definition for uploading artifact to Maven Central repository -->
     <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub seeseekey Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/seeseekey/mediawikixml</url>
-        </repository>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <!-- List of dependencies -->
@@ -88,6 +93,58 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
@@ -96,6 +153,7 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <!-- JUnit 5 requires Surefire version 2.22.1 or higher -->
                 <artifactId>maven-surefire-plugin</artifactId>
